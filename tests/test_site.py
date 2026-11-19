@@ -91,8 +91,9 @@ def test_home_sections():
     for sid in ["hero", "what", "why", "products", "services", "team", "gallery", "contact"]:
         assert s.find(id=sid) is not None, f"missing #{sid}"
     team = s.find(id="team").get_text(" ")
-    for name in ["Ahmed Hersi Osman", "Kaisar Omer", "Hood Mohamed", "Mawliid Osman", "Farhia Osman Moge"]:
+    for name in ["Ahmed Hersi Osman", "Kaisar Omer"]:
         assert name in team, name
+    assert "20 years" in team
     assert "AU-IBAR" in s.find(id="why").get_text()
     contact = str(s.find(id="contact"))
     assert "mailto:info@gasiin.co" in contact and "wa.me/252634367575" in contact
@@ -225,3 +226,11 @@ def test_mobile_menu_closes_on_link_and_escape():
         pg.keyboard.press("Escape")
         assert "open" not in (pg.get_attribute("#nav", "class") or "")
         b.close()
+
+
+def test_only_founders_shown_and_no_descriptor_line():
+    for f in list(ROOT.glob("*.html")) + [ROOT / "llms.txt"]:
+        text = f.read_text(encoding="utf-8")
+        for name in ["Hood Mohamed", "Mawliid Osman", "Farhia Osman Moge", "Key staff"]:
+            assert name not in text, f"{f.name} still shows '{name}'"
+    assert soup("index.html").select_one(".descriptor") is None
