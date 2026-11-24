@@ -115,18 +115,19 @@ def test_contact_form_emails_info():
     s = soup("contact.html")
     form = s.find("form")
     assert form is not None
-    assert form["action"] == "https://formsubmit.co/info@gasiin.co"
+    assert form["action"] == "https://api.web3forms.com/submit"
     assert form["method"].lower() == "post"
     names = {i.get("name") for i in form.find_all(["input", "textarea", "select"])}
-    for n in ["name", "email", "message", "_subject", "_next", "_honey"]:
+    for n in ["access_key", "name", "email", "message", "subject", "redirect", "botcheck"]:
         assert n in names, n
+    assert form.find("input", attrs={"name": "access_key"})["value"].strip()
     for field in form.find_all(["input", "textarea"]):
-        if field.get("type") in ("hidden",) or field.get("name") == "_honey":
+        if field.get("type") in ("hidden",) or field.get("name") == "botcheck":
             continue
         fid = field.get("id")
         assert fid and s.find("label", attrs={"for": fid}), f"field {field.get('name')} has no label"
     assert form.find("input", attrs={"name": "email"})["type"] == "email"
-    assert form.find("input", attrs={"name": "_next"})["value"] == "https://gasiin.co/thank-you.html"
+    assert form.find("input", attrs={"name": "redirect"})["value"] == "https://gasiin.co/thank-you.html"
     assert (ROOT / "thank-you.html").is_file()
 
 
@@ -150,7 +151,7 @@ def test_discovery_files():
         assert soup(p).find("meta", attrs={"property": "og:image"}), p
 
 
-PUBLIC_EXT = {".html", ".css", ".js", ".svg", ".png", ".ico", ".xml", ".txt", ""}
+PUBLIC_EXT = {".html", ".css", ".js", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".ico", ".xml", ".txt", ""}
 
 
 def test_published_folder_holds_only_site_files():

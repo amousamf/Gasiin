@@ -51,11 +51,12 @@
 
 <section class="section">
   <div class="container grid-2" style="align-items:start">
-    <form class="card form" action="https://formsubmit.co/info@gasiin.co" method="POST">
-      <input type="hidden" name="_subject" value="New enquiry from gasiin.co">
-      <input type="hidden" name="_next" value="https://gasiin.co/thank-you.html">
-      <input type="hidden" name="_template" value="table">
-      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <form class="card form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="9f91c54a-e38c-45ae-bbf9-99f93e8b7666">
+      <input type="hidden" name="subject" value="New enquiry from gasiin.co">
+      <input type="hidden" name="from_name" value="Gasiin website">
+      <input type="hidden" name="redirect" value="https://gasiin.co/thank-you.html">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <label for="f-name">Full name</label>
       <input id="f-name" type="text" name="name" autocomplete="name" required>
