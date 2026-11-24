@@ -106,6 +106,17 @@ p { margin: 0 0 1em; }
 .placeholder { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius); background: var(--deep-forest) url("../img/g-mark-faint.svg") center / 38% no-repeat; display: flex; align-items: flex-end; padding: 14px 16px; color: #CFE3D4; font-size: .85rem; font-weight: 600; overflow: hidden; }
 .placeholder--tall { aspect-ratio: 5 / 4; }
 .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+/* Gallery photos with hover captions */
+.photo { position: relative; margin: 0; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; background: var(--deep-forest); }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+.photo figcaption { position: absolute; inset: auto 0 0 0; padding: 40px 16px 14px; color: #fff; background: linear-gradient(180deg, rgba(10,40,25,0) 0%, rgba(10,40,25,.88) 55%); display: grid; gap: 4px; font-size: .9rem; line-height: 1.4; transform: translateY(101%); transition: transform .35s ease; }
+.photo figcaption strong { font-size: 1rem; }
+.photo figcaption time { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #F0C64A; }
+.photo:hover figcaption, .photo:focus-within figcaption, .photo:focus figcaption { transform: none; }
+.photo:hover img, .photo:focus img { transform: scale(1.04); }
+.photo:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+@media (hover: none) { .photo figcaption { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .photo img, .photo figcaption { transition: none; } }
 .video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: var(--deep-forest); margin-top: 16px; }
 .video button { all: unset; cursor: pointer; position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-weight: 700; }
 .video button span { background: var(--gold); color: var(--deep-forest); padding: 12px 22px; border-radius: 999px; }
