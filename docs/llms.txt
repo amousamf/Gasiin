@@ -1,6 +1,6 @@
 # Gasiin Enterprise
 
-> Gasiin Enterprise is an early-stage, integrated livestock feed and livestock agribusiness registered in Somaliland, with its office in Shacab Area, Hargeisa. It is building a supply of graded quality hay, vacuum-wrapped silage and species-specific concentrate feeds for commercial dairy, poultry and pre-export livestock producers, and has piloted fattening sheep, goats and cattle for export in Arabsiyo district. "Gasiin" is the Somali word for feed or food. Tagline: "Boosting livestock productivity & profitability".
+> Gasiin Enterprise is an early-stage, integrated livestock feed and livestock agribusiness with its office in Shacab Area, Hargeisa. It is building a supply of graded quality hay, vacuum-wrapped silage and species-specific concentrate feeds for commercial dairy, poultry and pre-export livestock producers, and has piloted fattening sheep, goats and cattle for export in Arabsiyo district. "Gasiin" is the Somali word for feed or food. Tagline: "Boosting livestock productivity & profitability".
 
 ## Products
 - Gasiin Hay: graded, sun-cured, dust-free hay in 20–25 kg bales.
