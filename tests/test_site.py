@@ -48,6 +48,7 @@ def test_internal_links_resolve(page):
         if r.startswith(("http", "mailto:", "tel:", "#")):
             continue
         path, _, frag = r.partition("#")
+        path = path.split("?", 1)[0]
         target = ROOT / path
         assert target.is_file(), f"{page}: broken link {r}"
         if frag and path.endswith(".html"):
