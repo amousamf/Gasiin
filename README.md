@@ -24,6 +24,9 @@ The header and footer are repeated in every page. If you change one, change it i
 3. Replace it with:
    `<img class="photo" src="assets/img/photos/hay-baling.jpg" alt="Hay baling at the Gasiin farm" loading="lazy">`
 
+## The intro video
+The one-minute intro on the home page is `docs/assets/video/gasiin-intro.mp4` (poster image: `gasiin-intro-poster.jpg` in the same folder). To replace it, upload a new MP4 with the same name.
+
 ## Adding a YouTube video
 In `docs/index.html`, replace the "Video coming soon" block with:
 `<div class="video"><button type="button" data-youtube="VIDEO_ID" aria-label="Play video: TITLE"><span>▶ Play video</span></button></div>`
