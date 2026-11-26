@@ -152,7 +152,7 @@ def test_discovery_files():
         assert soup(p).find("meta", attrs={"property": "og:image"}), p
 
 
-PUBLIC_EXT = {".html", ".css", ".js", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".ico", ".xml", ".txt", ""}
+PUBLIC_EXT = {".html", ".css", ".js", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".ico", ".xml", ".txt", "", ".mp4"}
 
 
 def test_published_folder_holds_only_site_files():
@@ -236,3 +236,13 @@ def test_only_founders_shown_and_no_descriptor_line():
         for name in ["Hood Mohamed", "Mawliid Osman", "Farhia Osman Moge", "Key staff"]:
             assert name not in text, f"{f.name} still shows '{name}'"
     assert soup("index.html").select_one(".descriptor") is None
+
+
+def test_intro_video():
+    s = soup("index.html")
+    v = s.select_one("#gallery video") or s.select_one(".video video")
+    assert v is not None and v.get("aria-label")
+    assert (ROOT / v["poster"]).is_file()
+    src = v.find("source")["src"]
+    assert (ROOT / src).is_file() and src.endswith(".mp4")
+    assert s.select_one(".video.placeholder") is None
