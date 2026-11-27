@@ -246,3 +246,10 @@ def test_intro_video():
     src = v.find("source")["src"]
     assert (ROOT / src).is_file() and src.endswith(".mp4")
     assert s.select_one(".video.placeholder") is None
+
+
+def test_gallery_photos_have_no_dates():
+    for p in PAGES:
+        for cap in soup(p).select("figcaption"):
+            assert cap.find("time") is None, f"{p}: dated caption: {cap.get_text(' ', strip=True)}"
+            assert "November 2026" not in cap.get_text(), p
