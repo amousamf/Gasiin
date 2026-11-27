@@ -253,3 +253,20 @@ def test_gallery_photos_have_no_dates():
         for cap in soup(p).select("figcaption"):
             assert cap.find("time") is None, f"{p}: dated caption: {cap.get_text(' ', strip=True)}"
             assert "November 2026" not in cap.get_text(), p
+
+
+def _logo_srcs(page):
+    s = soup(page)
+    return [i["src"] for i in s.select("img[src*='logo']")]
+
+
+def test_no_logo_with_old_descriptor_line_in_use():
+    # The "HAY | SILAGE | LIVESTOCK FEED | AGRIBUSINESS" line uses 6.6-wide separator bars.
+    used = {src for p in PAGES for src in _logo_srcs(p)}
+    blocks = [json.loads(b.string) for b in soup("index.html").select('script[type="application/ld+json"]')]
+    org = next(b for b in blocks if b.get("@type") == "Organization")
+    used.add(org["logo"].replace("https://gasiin.co/", ""))
+    for src in used:
+        assert 'width="6.6"' not in (ROOT / src).read_text(), f"{src} still has the descriptor line"
+    for p in PAGES:
+        assert soup(p).select_one(".site-footer img")["src"] == "assets/img/logo-reversed-compact.svg", p
